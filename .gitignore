@@ -1,0 +1,11 @@
+# Xcode
+*.xcuserstate
+*.xcuserdata
+DerivedData/
+build/
+
+# macOS
+.DS_Store
+
+# Secrets
+Secrets.plist
