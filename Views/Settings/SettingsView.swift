@@ -9,6 +9,12 @@ struct SettingsView: View {
     @State private var apiKey = ""
     @State private var showDisclaimer = false
     @State private var showAPIKeySaved = false
+    @FocusState private var focusedField: Field?
+
+    private enum Field {
+        case threshold
+        case minAmount
+    }
 
     var body: some View {
         NavigationStack {
@@ -26,10 +32,9 @@ struct SettingsView: View {
                             TextField("5.0", text: $thresholdText)
                                 .keyboardType(.decimalPad)
                                 .multilineTextAlignment(.trailing)
+                                .focused($focusedField, equals: .threshold)
                                 .onSubmit {
-                                    if let val = Double(thresholdText) {
-                                        vm?.alertSetting?.thresholdPercent = val
-                                    }
+                                    saveThreshold()
                                 }
                         }
 
@@ -39,10 +44,9 @@ struct SettingsView: View {
                             TextField("1000", text: $minAmountText)
                                 .keyboardType(.numberPad)
                                 .multilineTextAlignment(.trailing)
+                                .focused($focusedField, equals: .minAmount)
                                 .onSubmit {
-                                    if let val = Double(minAmountText) {
-                                        vm?.alertSetting?.minAmountCNY = val
-                                    }
+                                    saveMinAmount()
                                 }
                         }
                     }
@@ -81,6 +85,17 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("设置")
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("完成") {
+                        focusedField = nil
+                        saveThreshold()
+                        saveMinAmount()
+                    }
+                    .fontWeight(.semibold)
+                }
+            }
             .alert("已保存", isPresented: $showAPIKeySaved) {
                 Button("好的", role: .cancel) {}
             } message: {
@@ -92,6 +107,18 @@ struct SettingsView: View {
             .onAppear {
                 loadSettings()
             }
+        }
+    }
+
+    private func saveThreshold() {
+        if let val = Double(thresholdText) {
+            vm?.alertSetting?.thresholdPercent = val
+        }
+    }
+
+    private func saveMinAmount() {
+        if let val = Double(minAmountText) {
+            vm?.alertSetting?.minAmountCNY = val
         }
     }
 
