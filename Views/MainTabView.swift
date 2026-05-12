@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Combine
 
 struct MainTabView: View {
     @Environment(\.modelContext) private var modelContext
@@ -47,6 +48,10 @@ struct MainTabView: View {
             vm.loadCache()
             vm.loadLastRefreshTime()
             await vm.refreshAll()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("BackgroundRefresh"))) { _ in
+            guard let vm = viewModel else { return }
+            Task { await vm.refreshAll() }
         }
     }
 }

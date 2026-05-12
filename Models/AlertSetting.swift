@@ -8,7 +8,7 @@ final class AlertSetting {
     var isEnabled: Bool
     var aiAnalysisEnabled: Bool
 
-    init(thresholdPercent: Double = 5.0, minAmountCNY: Double = 1000, isEnabled: Bool = true, aiAnalysisEnabled: Bool = true) {
+    init(thresholdPercent: Double = 5.0, minAmountCNY: Double = 1000, isEnabled: Bool = true, aiAnalysisEnabled: Bool = false) {
         self.thresholdPercent = thresholdPercent
         self.minAmountCNY = minAmountCNY
         self.isEnabled = isEnabled

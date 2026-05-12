@@ -76,9 +76,13 @@ struct OverviewView: View {
                         Text("总浮盈")
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                        Text(summary.totalUnrealizedPnL.formattedCNY())
-                            .font(.headline)
-                            .foregroundStyle(MarketColor.forChange(summary.totalUnrealizedPnL))
+                        HStack(spacing: 4) {
+                            Text(summary.totalUnrealizedPnL.formattedCNY())
+                                .font(.headline)
+                            Text(summary.totalUnrealizedPnLPercent.formattedPercent())
+                                .font(.caption)
+                        }
+                        .foregroundStyle(MarketColor.forChange(summary.totalUnrealizedPnL))
                     }
                 }
 

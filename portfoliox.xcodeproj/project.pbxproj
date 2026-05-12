@@ -10,6 +10,7 @@
 		E38A65BD2FAE24F900F39501 /* portfoliox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = portfoliox.xcodeproj; sourceTree = "<group>"; };
 		E3E1A6942FA3258F0027BA12 /* portfoliox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = portfoliox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E1A7232FA3989B0027BA12 /* portfoliox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = portfoliox.xcodeproj; sourceTree = "<group>"; };
+		E3F486462FB1AE43006288F0 /* portfoliox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = portfoliox.xcodeproj; sourceTree = "<group>"; };
 		E3FBFB9F2FA9DD1A00982CE6 /* portfoliox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = portfoliox.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +55,11 @@
 			sourceTree = "<group>";
 		};
 		E3E1A7272FA3989B0027BA12 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E3F4864B2FB1AE43006288F0 /* Products */ = {
 			isa = PBXGroup;
 			name = Products;
 			sourceTree = "<group>";
@@ -123,6 +129,10 @@
 				{
 					ProductGroup = E3FBFBA32FA9DD1A00982CE6 /* Products */;
 					ProjectRef = E3FBFB9F2FA9DD1A00982CE6 /* portfoliox.xcodeproj */;
+				},
+				{
+					ProductGroup = E3F4864B2FB1AE43006288F0 /* Products */;
+					ProjectRef = E3F486462FB1AE43006288F0 /* portfoliox.xcodeproj */;
 				},
 				{
 					ProductGroup = E38A65C22FAE24F900F39501 /* Products */;
@@ -288,8 +298,11 @@
 				DEVELOPMENT_TEAM = 84J77J8HXF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_BGTaskSchedulerPermittedIdentifiers = com.portfoliox.refresh;
+				INFOPLIST_KEY_CFBundleDisplayName = "合盈";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIBackgroundModes = fetch;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -297,7 +310,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "yang-yang.portfoliox";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -320,8 +333,11 @@
 				DEVELOPMENT_TEAM = 84J77J8HXF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_BGTaskSchedulerPermittedIdentifiers = com.portfoliox.refresh;
+				INFOPLIST_KEY_CFBundleDisplayName = "合盈";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIBackgroundModes = fetch;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -329,7 +345,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "yang-yang.portfoliox";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

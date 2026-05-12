@@ -3,7 +3,6 @@ import SwiftUI
 struct PortfolioListView: View {
     @Environment(\.portfolioViewModel) private var vm
     @State private var selectedStock: PortfolioViewModel.StockPnL?
-    @State private var showDetail = false
 
     var body: some View {
         NavigationStack {
@@ -26,7 +25,6 @@ struct PortfolioListView: View {
                                                 .contentShape(Rectangle())
                                                 .onTapGesture {
                                                     selectedStock = stock
-                                                    showDetail = true
                                                 }
                                                 .swipeActions(edge: .trailing) {
                                                     Button(role: .destructive) {
@@ -78,10 +76,8 @@ struct PortfolioListView: View {
             .refreshable {
                 await vm?.refreshAll()
             }
-            .sheet(isPresented: $showDetail) {
-                if let stock = selectedStock {
-                    StockDetailView(stock: stock)
-                }
+            .sheet(item: $selectedStock) { stock in
+                StockDetailView(stock: stock)
             }
         }
     }

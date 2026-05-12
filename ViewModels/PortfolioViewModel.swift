@@ -158,7 +158,8 @@ final class PortfolioViewModel {
         var totalMarketValue: Double { stocks.reduce(0) { $0 + $1.marketValueCNY } }
     }
 
-    struct StockPnL {
+    struct StockPnL: Identifiable {
+        var id: String { holding.symbol }
         let holding: StockHolding
         let quote: MarketQuote?
         let exchangeRate: ExchangeRate?
@@ -189,13 +190,18 @@ final class PortfolioViewModel {
             return (price - cost) * holding.shares * rate
         }
 
+        var costBasisCNY: Double {
+            guard let cost = holding.avgCost, cost > 0 else { return 0 }
+            return cost * holding.shares * rate
+        }
+
         var dayPnLPercent: Double {
             guard let quote = quote, quote.price > 0 else { return 0 }
             return quote.changePercent
         }
     }
 
-    var portfolioSummary: (totalValue: Double, totalDayPnL: Double, totalDayPnLPercent: Double, totalUnrealizedPnL: Double) {
+    var portfolioSummary: (totalValue: Double, totalDayPnL: Double, totalDayPnLPercent: Double, totalUnrealizedPnL: Double, totalUnrealizedPnLPercent: Double) {
         let stocks = allStockPnLs
         let totalValue = stocks.reduce(0) { $0 + $1.marketValueCNY }
         let totalDay = stocks.reduce(0) { $0 + $1.dayPnLCNY }
@@ -207,7 +213,9 @@ final class PortfolioViewModel {
             }
             return yestValue > 0 ? (totalDay / yestValue) * 100 : 0
         }()
-        return (totalValue, totalDay, totalDayPercent, totalUnrealized)
+        let totalCost = stocks.reduce(0) { $0 + $1.costBasisCNY }
+        let totalUnrealizedPnLPercent = totalCost > 0 ? (totalUnrealized / totalCost) * 100 : 0
+        return (totalValue, totalDay, totalDayPercent, totalUnrealized, totalUnrealizedPnLPercent)
     }
 
     var allStockPnLs: [StockPnL] {

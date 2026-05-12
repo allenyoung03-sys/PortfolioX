@@ -5,7 +5,7 @@ struct SettingsView: View {
     @State private var thresholdText = ""
     @State private var minAmountText = ""
     @State private var alertEnabled = true
-    @State private var aiEnabled = true
+    @State private var aiEnabled = false
     @State private var apiKey = ""
     @State private var showDisclaimer = false
     @State private var showAPIKeySaved = false
@@ -55,12 +55,6 @@ struct SettingsView: View {
                         .onChange(of: aiEnabled) { _, newValue in
                             vm?.alertSetting?.aiAnalysisEnabled = newValue
                         }
-                }
-
-                Section("AI 分析") {
-                    Text("AI 行情分析功能即将上线，敬请期待。")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
                 }
 
                 Section("关于") {
@@ -150,11 +144,10 @@ struct SettingsView: View {
                     .padding(.top)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("• 美股行情数据来自 Yahoo Finance，延迟约 15 分钟")
+                    Text("• 美股行情数据来自腾讯财经，延迟约 15 分钟")
                     Text("• A股行情数据来自新浪财经，延迟约 15 分钟")
-                    Text("• 港股行情数据来自 Yahoo Finance，延迟约 15 分钟")
+                    Text("• 港股行情数据来自腾讯财经，延迟约 15 分钟")
                     Text("• 汇率数据来自 ExchangeRate-API，每日更新")
-                    Text("• AI 分析由 Anthropic Claude 生成")
                 }
                 .font(.caption)
                 .foregroundStyle(.secondary)

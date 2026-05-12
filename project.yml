@@ -1,4 +1,4 @@
-name: PortfolioX
+name: 合盈
 options:
   bundleIdPrefix: com.portfoliox
   deploymentTarget:
@@ -9,20 +9,24 @@ settings:
   MARKETING_VERSION: "1.0.0"
   CURRENT_PROJECT_VERSION: "1"
   SWIFT_VERSION: "5.9"
-  TARGETED_DEVICE_FAMILY: "1"
+  TARGETED_DEVICE_FAMILY: "1,2"
 
 targets:
-  PortfolioX:
+  合盈:
     type: application
     platform: iOS
     sources:
       - path: .
     settings:
       base:
-        INFOPLIST_FILE: PortfolioX/Info.plist
-        PRODUCT_BUNDLE_IDENTIFIER: com.portfoliox.app
-        DEVELOPMENT_TEAM: ""
+        INFOPLIST_FILE: 合盈/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: yang-yang.portfoliox
+        DEVELOPMENT_TEAM: 84J77J8HXF
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_CFBundleDisplayName: "合盈"
+        PRODUCT_NAME: "合盈"
+        INFOPLIST_KEY_BGTaskSchedulerPermittedIdentifiers: ["com.portfoliox.refresh"]
+        INFOPLIST_KEY_UIBackgroundModes: ["fetch"]
     dependencies: []
     info:
-      path: PortfolioX/Info.plist
+      path: 合盈/Info.plist
