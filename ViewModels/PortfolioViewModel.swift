@@ -199,6 +199,11 @@ final class PortfolioViewModel {
             guard let quote = quote, quote.price > 0 else { return 0 }
             return quote.changePercent
         }
+
+        var unrealizedPnLPercent: Double {
+            guard costBasisCNY > 0 else { return 0 }
+            return (unrealizedPnLCNY / costBasisCNY) * 100
+        }
     }
 
     var portfolioSummary: (totalValue: Double, totalDayPnL: Double, totalDayPnLPercent: Double, totalUnrealizedPnL: Double, totalUnrealizedPnLPercent: Double) {

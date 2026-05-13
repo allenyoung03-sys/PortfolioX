@@ -50,6 +50,9 @@ struct OverviewStockRowView: View {
                         .font(.subheadline)
                         .fontWeight(.medium)
                         .foregroundStyle(MarketColor.forChange(stock.unrealizedPnLCNY))
+                    Text(stock.unrealizedPnLPercent.formattedPercent())
+                        .font(.caption)
+                        .foregroundStyle(MarketColor.forChange(stock.unrealizedPnLCNY))
                 }
             }
         }
