@@ -5,6 +5,7 @@ import Combine
 struct MainTabView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel: PortfolioViewModel?
+    @State private var showOnboarding = false
 
     var body: some View {
         ZStack {
@@ -52,6 +53,16 @@ struct MainTabView: View {
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("BackgroundRefresh"))) { _ in
             guard let vm = viewModel else { return }
             Task { await vm.refreshAll() }
+        }
+        .onAppear {
+            if !UserDefaults.standard.bool(forKey: Constants.UserDefaults.hasSeenOnboarding) {
+                showOnboarding = true
+            }
+        }
+        .fullScreenCover(isPresented: $showOnboarding) {
+            UserDefaults.standard.set(true, forKey: Constants.UserDefaults.hasSeenOnboarding)
+        } content: {
+            OnboardingView(isShowing: $showOnboarding)
         }
     }
 }

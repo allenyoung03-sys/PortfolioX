@@ -12,6 +12,7 @@ final class PortfolioViewModel {
     var exchangeRate: ExchangeRate?
     var alertRecords: [AlertRecord] = []
     var alertSetting: AlertSetting?
+    var snapshots: [PortfolioSnapshot] = []
 
     var isLoading = false
     var errorMessage: String?
@@ -35,6 +36,7 @@ final class PortfolioViewModel {
         loadExchangeRate()
         loadAlertRecords()
         loadAlertSetting()
+        loadSnapshots()
     }
 
     private func loadHoldings() {
@@ -68,6 +70,30 @@ final class PortfolioViewModel {
             try? modelContext.save()
             alertSetting = defaultSetting
         }
+    }
+
+    private func loadSnapshots() {
+        let descriptor = FetchDescriptor<PortfolioSnapshot>(
+            sortBy: [SortDescriptor(\.timestamp, order: .forward)]
+        )
+        snapshots = (try? modelContext.fetch(descriptor)) ?? []
+    }
+
+    private func captureSnapshot() {
+        guard !holdings.isEmpty else { return }
+
+        if let last = snapshots.last {
+            guard Date().timeIntervalSince(last.timestamp) >= Constants.snapshotInterval else { return }
+        }
+
+        let summary = portfolioSummary
+        let snapshot = PortfolioSnapshot(
+            totalValueCNY: summary.totalValue,
+            totalUnrealizedPnL: summary.totalUnrealizedPnL
+        )
+        modelContext.insert(snapshot)
+        try? modelContext.save()
+        snapshots.append(snapshot)
     }
 
     // MARK: - Holdings Management
@@ -145,6 +171,7 @@ final class PortfolioViewModel {
         UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: Constants.UserDefaults.lastRefreshKey)
 
         await checkAlerts()
+        captureSnapshot()
         isLoading = false
     }
 
@@ -239,6 +266,29 @@ final class PortfolioViewModel {
             }
         }
         return result
+    }
+
+    func snapshots(for timeRange: ChartTimeRange) -> [PortfolioSnapshot] {
+        let calendar = Calendar.current
+        let now = Date()
+        let filtered: [PortfolioSnapshot]
+
+        switch timeRange {
+        case .day:
+            filtered = snapshots.filter { calendar.isDateInToday($0.timestamp) }
+        case .week:
+            guard let weekAgo = calendar.date(byAdding: .day, value: -7, to: now) else { return [] }
+            filtered = snapshots.filter { $0.timestamp >= weekAgo }
+        case .month:
+            guard let monthAgo = calendar.date(byAdding: .day, value: -30, to: now) else { return [] }
+            filtered = snapshots.filter { $0.timestamp >= monthAgo }
+        }
+
+        let grouped = Dictionary(grouping: filtered) { snapshot in
+            calendar.startOfDay(for: snapshot.timestamp)
+        }
+        return grouped.values.compactMap { $0.max(by: { $0.timestamp < $1.timestamp }) }
+            .sorted { $0.timestamp < $1.timestamp }
     }
 
     // MARK: - Alerts
@@ -348,4 +398,10 @@ extension EnvironmentValues {
         get { self[PortfolioViewModelKey.self] }
         set { self[PortfolioViewModelKey.self] = newValue }
     }
+}
+
+enum ChartTimeRange: String, CaseIterable {
+    case day = "日"
+    case week = "周"
+    case month = "月"
 }

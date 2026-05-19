@@ -8,6 +8,7 @@
 
 /* Begin PBXFileReference section */
 		E38A65BD2FAE24F900F39501 /* portfoliox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = portfoliox.xcodeproj; sourceTree = "<group>"; };
+		E38CB61A2FBB50DC0006E450 /* portfoliox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = portfoliox.xcodeproj; sourceTree = "<group>"; };
 		E3E1A6942FA3258F0027BA12 /* portfoliox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = portfoliox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E1A7232FA3989B0027BA12 /* portfoliox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = portfoliox.xcodeproj; sourceTree = "<group>"; };
 		E3F486462FB1AE43006288F0 /* portfoliox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = portfoliox.xcodeproj; sourceTree = "<group>"; };
@@ -34,6 +35,11 @@
 
 /* Begin PBXGroup section */
 		E38A65C22FAE24F900F39501 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E38CB6202FBB50DC0006E450 /* Products */ = {
 			isa = PBXGroup;
 			name = Products;
 			sourceTree = "<group>";
@@ -122,6 +128,10 @@
 			productRefGroup = E3E1A6952FA3258F0027BA12 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = E38CB6202FBB50DC0006E450 /* Products */;
+					ProjectRef = E38CB61A2FBB50DC0006E450 /* portfoliox.xcodeproj */;
+				},
 				{
 					ProductGroup = E3E1A7272FA3989B0027BA12 /* Products */;
 					ProjectRef = E3E1A7232FA3989B0027BA12 /* portfoliox.xcodeproj */;

@@ -19,6 +19,7 @@ struct PortfolioXApp: App {
             ExchangeRate.self,
             AlertSetting.self,
             AlertRecord.self,
+            PortfolioSnapshot.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         do {

@@ -14,12 +14,14 @@ enum Constants {
 
     static let maxStockCount = 20
     static let refreshInterval: TimeInterval = 15 * 60
+    static let snapshotInterval: TimeInterval = 1800
     static let defaultThresholdPercent: Double = 5.0
     static let defaultMinAmountCNY: Double = 1000.0
 
     enum UserDefaults {
         static let lastRefreshKey = "lastRefreshTime"
         static let disclaimerAccepted = "disclaimerAccepted"
+        static let hasSeenOnboarding = "hasSeenOnboarding"
     }
 
     static let disclaimerText = """

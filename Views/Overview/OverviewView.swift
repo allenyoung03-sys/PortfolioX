@@ -9,6 +9,7 @@ struct OverviewView: View {
                 if let vm = vm {
                     VStack(spacing: 16) {
                         summaryCard
+                        trendChart
                         marketSections
                     }
                     .padding()
@@ -96,6 +97,13 @@ struct OverviewView: View {
             .frame(maxWidth: .infinity)
             .background(.regularMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 16))
+        }
+    }
+
+    @ViewBuilder
+    private var trendChart: some View {
+        if let vm = vm, !vm.holdings.isEmpty {
+            PortfolioTrendChartView(snapshots: vm.snapshots)
         }
     }
 
